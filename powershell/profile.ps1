@@ -3,8 +3,12 @@
 
 # Alias
 ## Github Folder
-Function FUNCGH {Set-Location -Path C:\Code\Github\}
+Function FUNCGH {Set-Location -Path C:\Github\}
 Set-Alias -Name gh -Value FUNCGH
 
+## Gitlab Folder
+Function FUNCGL {Set-Location -Path C:\Gitlab\}
+Set-Alias -Name gl -Value FUNCGL
+
 # Check output
-Write-Output "andxpto loaded"
+Write-Output "andxpto configs loaded"
