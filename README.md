@@ -7,3 +7,7 @@ my .dotfiles
 - MacOS defaults
 - Windows defaults
 - System alias
+
+## License
+
+[MIT](LICENSE)
