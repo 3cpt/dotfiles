@@ -9,6 +9,9 @@ sudo nvram SystemAudioVolume=" "
 # show hidden files
 defaults write com.apple.Finder AppleShowAllFiles true
 
+# disable mouse acceleration (requires restart)
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
 # Always show scrollbars
 defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
 
