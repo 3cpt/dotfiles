@@ -1,4 +1,4 @@
-# andxpto mac system defaults
+# mac alias
 
-# set default docker command
 alias d=docker $*
+alias rlinter=repolinter -r ~/Github/repolinter.json $*
