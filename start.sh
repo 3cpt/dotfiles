@@ -17,3 +17,5 @@ sed -i "/plugins=(git)/c plugins=(\n\tgit\n\tzsh-autosuggestions\n\tzsh-syntax-h
 sudo apt install tmux
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+curl -o .tmux.conf https://raw.githubusercontent.com/3cpt/dotfiles/master/.tmux.conf
