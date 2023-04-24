@@ -13,3 +13,4 @@ brew install robo-3t
 brew install vlc
 brew install slack
 brew install spotify
+brew install maccy # clipboard manager
