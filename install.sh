@@ -30,6 +30,10 @@ install_zsh
 echo "🔨 Installing tmux, git, lazydocker, and fzf..."
 brew install git lazydocker fzf micro kubectl # tmux
 
+# Install terraform
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
 # Install oh-my-posh
 echo "🎨 Installing oh-my-posh and fonts..."
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
