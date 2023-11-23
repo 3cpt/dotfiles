@@ -21,7 +21,7 @@ OS_TYPE=$(uname)
 
 # Determine the Oh My Posh path based on the OS
 if [ "$OS_TYPE" = "Darwin" ]; then
-    OMP_PATH="$(brew --prefix oh-my-posh)/bin/oh-my-posh"
+    OMP_PATH="$(brew --prefix oh-my-posh)"
 else
     OMP_PATH=$HOME
 fi
