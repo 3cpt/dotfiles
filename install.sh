@@ -2,61 +2,78 @@
 
 echo "🚗 Starting installation..."
 
+# Function to determine if sudo is required
+use_sudo() {
+    if [ "$(id -u)" != "0" ]; then
+        echo "sudo"
+    fi
+}
+
+SUDO=$(use_sudo)
+
 # Check for Operating System
 OS="$(uname)"
 echo "🖥️  Operating System: $OS"
 
-# Function to install Homebrew
-install_brew() {
-    echo "🍺 Installing Homebrew..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-    brew update
-    brew upgrade
-}
-
 # Function to install Zsh and Oh-My-Zsh
 install_zsh() {
-    echo "🐚 Installing Zsh and Oh-My-Zsh..."
-    brew install zsh
+    echo "🐚 Installing Zsh..."
+    if [ "$OS" = "Darwin" ]; then
+        brew install zsh
+    else
+        $SUDO apt update
+        $SUDO apt-get install -y git curl unzip zsh fontconfig
+    fi
+
+    echo "🔮 Installing Oh-My-Zsh..."
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
-# Install Homebrew, Zsh, and Oh-My-Zsh
-install_brew
+# Install Zsh and Oh-My-Zsh
 install_zsh
 
 # Install basic tools
 echo "🔨 Installing tmux, git, lazydocker, and fzf..."
-brew install git lazydocker fzf micro kubectl # tmux
+if [ "$OS" = "Darwin" ]; then
+    brew install tmux git lazydocker fzf
 
-# Install terraform
-brew tap hashicorp/tap
-brew install hashicorp/tap/terraform
+    echo "🎨 Installing oh-my-posh and fonts..."
+    brew install jandedobbeleer/oh-my-posh/oh-my-posh
 
-# Install oh-my-posh
-echo "🎨 Installing oh-my-posh and fonts..."
-brew install jandedobbeleer/oh-my-posh/oh-my-posh
-oh-my-posh font install
+    brew install fontconfig
+    if ! fc-list | grep -qi "FiraCode"; then
+        echo "Installing FiraCode font..."
+        oh-my-posh font install
+    else
+        echo "FiraCode font is already installed."
+    fi
 
-# Install fzf useful key bindings and fuzzy completion
-echo "🔍 Setting up fzf..."
-"$(brew --prefix)/opt/fzf/install"
+else
+    $SUDO apt-get install -y tmux git fzf
+    # lazydocker installation for Linux
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
+    echo "🎨 Installing oh-my-posh and fonts..."
+    curl -s https://ohmyposh.dev/install.sh | bash -s
+
+    if ! fc-list | grep -qi "FiraCode"; then
+        echo "Installing FiraCode font..."
+        oh-my-posh font install
+    else
+        echo "FiraCode font is already installed."
+    fi
+fi
 
 # Install Docker and VSCode for macOS
 if [ "$OS" = "Darwin" ]; then
-    echo "🍏 Installing applications for macOS..."
+    echo "🍏 Installing Docker and Visual Studio Code for macOS..."
     brew install --cask docker visual-studio-code
-    brew install iterm2 node postman robo-3t vlc slack spotify maccy
-
-    echo "🛠️  Applying macOS defaults..."
-    sh macosdefaults.sh
 fi
 
 # Install Oh-My-Zsh plugins
 echo "🔌 Installing Oh-My-Zsh plugins..."
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 
 # Create or append custom alias and functions files
 echo "🔗 Setting up custom alias and function files..."
@@ -74,6 +91,6 @@ fi
 
 # Create a symlink for .zshrc (ensure source path is correct)
 echo "🔗 Creating a symlink for .zshrc..."
-ln -sf ~/dotfiles/.zshrc ~/.zshrc
+ln -sf $HOME/dotfiles/.zshrc ~/.zshrc
 
 echo "🏁 Installation complete. Please restart your terminal."
