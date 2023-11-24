@@ -6,9 +6,6 @@ sudo -v
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-# show hidden files
-defaults write com.apple.Finder AppleShowAllFiles true
-
 # disable mouse acceleration (requires restart)
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
@@ -28,7 +25,7 @@ defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -58,7 +55,7 @@ for app in "Activity Monitor" \
 	"Google Chrome" \
 	"SystemUIServer" \
 	"Terminal"; do
-	killall "${app}" &> /dev/null
+	killall "${app}" &>/dev/null
 done
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
