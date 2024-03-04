@@ -34,4 +34,4 @@ else
 fi
 
 # Initialize Oh My Posh with the determined configuration
-eval "$(oh-my-posh init zsh --config $OMP_THEME)"
+eval "$(oh-my-posh init zsh --config /opt/homebrew/opt/oh-my-posh/a.omp.json)"

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# todo in case of error, interrupt the script and exit
+# todo add logging
+# todo in the zshrc check if its a ssh session, if yes, enable tmux
+
 echo "🚗 Starting installation..."
 
 # Function to determine if sudo is required
@@ -26,7 +30,7 @@ install_zsh() {
     fi
 
     echo "🔮 Installing Oh-My-Zsh..."
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended --keep-zshrc
 }
 
 # Install Zsh and Oh-My-Zsh
@@ -38,6 +42,7 @@ if [ "$OS" = "Darwin" ]; then
     brew install tmux git lazydocker fzf
 
     echo "🎨 Installing oh-my-posh and fonts..."
+
     brew install jandedobbeleer/oh-my-posh/oh-my-posh
 
     brew install fontconfig
@@ -48,6 +53,11 @@ if [ "$OS" = "Darwin" ]; then
         echo "FiraCode font is already installed."
     fi
 
+    brew tap hashicorp/tap
+    brew install hashicorp/tap/terraform
+
+    terraform -install-autocomplete
+
 else
     $SUDO apt-get install -y tmux git fzf
     # lazydocker installation for Linux
@@ -55,6 +65,10 @@ else
 
     echo "🎨 Installing oh-my-posh and fonts..."
     curl -s https://ohmyposh.dev/install.sh | bash -s
+
+    # Install Oh-My-Zsh for Linux
+    executable=${install_dir}/oh-my-posh
+    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
 
     if ! fc-list | grep -qi "FiraCode"; then
         echo "Installing FiraCode font..."
