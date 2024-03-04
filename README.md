@@ -26,6 +26,13 @@
 - node
 - go
 
+### For raspeberry
+
+- tmux
+- oh-my-posh at .local/bin
+- snap
+- microk8s
+
 ## License
 
 [MIT](LICENSE)
