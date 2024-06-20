@@ -1,7 +1,5 @@
 # dotfiles
 
-my .dotfiles
-
 ## What
 
 - MacOS defaults
@@ -10,27 +8,30 @@ my .dotfiles
 
 ## Alias
 
-
 ## Tools
 
-* zsh
-* ohmyzsh
-* brew
-* bat
-* exa
-* ctop
-* kubectl
-* lazydocker
-* lazygit
-* fzf
+- zsh
+- ohmyzsh
+- brew
+- kubectl
+- lazydocker
+- lazygit
+- fzf
 
 ### Specific setup
 
-* docker
-* vscode
-* github desktop
-* node
-* go
+- docker
+- vscode
+- github desktop
+- node
+- go
+
+### For raspeberry
+
+- tmux
+- oh-my-posh at .local/bin
+- snap
+- microk8s
 
 ## License
 
