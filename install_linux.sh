@@ -62,9 +62,10 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 # Linux post-installation steps for Docker Engine
 sudo groupadd docker
 sudo usermod -aG docker $USER
-newgrp docker
+sudo newgrp docker
 
 # Symlink .zshrc
 sudo ln -sf $HOME/adr/dotfiles/.zshrc $HOME/.zshrc
+sudo ln -sf $HOME/adr/dotfiles/.zsh_alias $HOME/.zsh_alias
 
 exec zsh

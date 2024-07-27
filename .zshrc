@@ -15,7 +15,6 @@ plugins=(
     history
     kubectl
     microk8s
-    tmux
     zsh-syntax-highlighting
     zsh-autosuggestions
 )
