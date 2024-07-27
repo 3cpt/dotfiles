@@ -25,4 +25,6 @@ source ~/.zsh_alias
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export PATH=$PATH:$HOME/.local/bin
+
 eval "$(oh-my-posh init zsh --config $HOME/adr/dotfiles/adr.omp.yaml)"

@@ -65,6 +65,6 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Symlink .zshrc
-ln -s $HOME/adr/dotfiles/.zshrc $HOME/.zshrc
+sudo ln -sf $HOME/adr/dotfiles/.zshrc $HOME/.zshrc
 
 exec zsh
