@@ -61,7 +61,4 @@ sudo usermod -aG docker $USER
 newgrp docker
 
 # Symlink .zshrc
-ln -s $HOME/.adr/dotfiles/.zshrc $HOME/.zshrc
-
-# Symlink oh-my-posh theme
-ln -s $HOME/.dotfiles/adr.omp.yaml $HOME/.adr/dotfiles/adr.omp.yaml
+ln -s $HOME/adr/dotfiles/.zshrc $HOME/.zshrc

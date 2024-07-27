@@ -25,4 +25,4 @@ source ~/.zsh_alias
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval "$(oh-my-posh init zsh --config $HOME/.adr/dotfiles/adr.omp.yaml)"
+eval "$(oh-my-posh init zsh --config $HOME/adr/dotfiles/adr.omp.yaml)"

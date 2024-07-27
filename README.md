@@ -33,6 +33,11 @@
 - snap
 - microk8s
 
+## Test
+
+docker build -t mydebian .
+docker run -it mydebian
+
 ## License
 
 [MIT](LICENSE)
