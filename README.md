@@ -38,6 +38,21 @@
 docker build -t mydebian .
 docker run -it mydebian
 
+## Script to start
+
+```bash
+cd $HOME && \
+sudo apt update && \
+sudo apt install -y git && \
+mkdir -p adr && \
+cd adr && \
+git clone https://github.com/3cpt/dotfiles.git && \
+cd dotfiles && \
+git checkout v3 && \
+chmod +x install_linux.sh && \
+./install_linux.sh
+```
+
 ## License
 
 [MIT](LICENSE)

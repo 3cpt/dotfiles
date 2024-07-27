@@ -9,12 +9,8 @@ plugins=(
     encode64
     git
     gh
-    terraform
     wd
-    golang
     history
-    kubectl
-    microk8s
     zsh-syntax-highlighting
     zsh-autosuggestions
 )

@@ -24,12 +24,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 mkdir -p $HOME/.local/bin
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
 
-# Install lazydocker
-curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
-
-# Install lazygit
-curl https://raw.githubusercontent.com/jesseduffield/lazygit/master/scripts/install.sh | bash
-
 # Install brew if its not arm
 if [ "$(uname -m)" != "aarch64" ]; then
     sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -63,6 +57,8 @@ if [ "$DOCKER" = true ]; then
     sudo groupadd docker
     sudo usermod -aG docker $USER
     sudo newgrp docker
+
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 fi
 
 # Symlink .zshrc
