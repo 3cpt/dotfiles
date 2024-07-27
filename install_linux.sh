@@ -7,8 +7,10 @@ sudo apt upgrade -y
 sudo apt install -y zsh micro curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-# Set zsh as the default shell
-chsh -s $(which zsh)
+# Set zsh as the default shell and before echo about it
+echo "zsh is now the default shell, password REQUIRED"
+sudo chsh -s $(which zsh)
+echo "zsh is now the default shell DONE"
 
 # Install oh-my-zsh plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
