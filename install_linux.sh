@@ -30,15 +30,17 @@ curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/i
 # Install lazygit
 curl https://raw.githubusercontent.com/jesseduffield/lazygit/master/scripts/install.sh | bash
 
-# Install brew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Install brew if its not arm
+if [ "$(uname -m)" != "aarch64" ]; then
+    sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Test and add brew to PATH
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    # Test and add brew to PATH
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >>~/.zshrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# Update brew
-brew update
+    # Update brew
+    brew update
+fi
 
 # Add Docker's official GPG key:
 sudo apt update
@@ -64,3 +66,5 @@ newgrp docker
 
 # Symlink .zshrc
 ln -s $HOME/adr/dotfiles/.zshrc $HOME/.zshrc
+
+exec zsh
