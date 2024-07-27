@@ -4,7 +4,7 @@ sudo apt update
 sudo apt upgrade -y
 
 # Install Zsh and Oh-My-Zsh
-sudo apt install -y zsh micro
+sudo apt install -y zsh micro curl
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 # Set zsh as the default shell
