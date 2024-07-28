@@ -31,7 +31,7 @@ if [ "$OS" = "Darwin" ]; then
     brew update
 
     # Install brew tools
-    brew install zsh micro curl htop unzip fzf
+    brew install zsh micro curl htop unzip fzf tmux
 
 elif [ "$OS" = "Linux" ]; then
     echo "Detected Linux"
@@ -41,7 +41,7 @@ elif [ "$OS" = "Linux" ]; then
     sudo apt upgrade -y
 
     # Install apt tools
-    sudo apt install -y zsh micro curl htop unzip fzf
+    sudo apt install -y zsh micro curl htop unzip fzf tmux
 else
     echo "Unsupported OS: $OS"
     exit 1
@@ -54,6 +54,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 mkdir -p $HOME/.local/bin
 curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
+
+# Install tpm (Tmux Plugin Manager)
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 if [ "$DOCKER" = true ]; then
     if [ "$OS" = "Darwin" ]; then
@@ -94,6 +97,7 @@ fi
 # Symlink .zshrc
 ln -sf $HOME/adr/dotfiles/.zshrc $HOME/.zshrc
 ln -sf $HOME/adr/dotfiles/.zsh_alias $HOME/.zsh_alias
+ln -sf $HOME/adr/dotfiles/.tmux.conf $HOME/.tmux.conf
 
 exec zsh
 

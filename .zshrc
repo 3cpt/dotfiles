@@ -1,4 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
+export PATH=$PATH:$HOME/.local/bin
 
 plugins=(
     aliases
@@ -12,6 +13,12 @@ source ~/.zsh_alias
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export PATH=$PATH:$HOME/.local/bin
+# Check if the script is running in an SSH session
+if [[ -n "$SSH_CONNECTION" ]]; then
+    # Check if tmux is already running
+    if [ -z "$TMUX" ]; then
+        tmux attach || tmux new-session
+    fi
+fi
 
 eval "$(oh-my-posh init zsh --config $HOME/adr/dotfiles/adr.omp.yaml)"
