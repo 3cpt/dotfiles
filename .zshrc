@@ -2,14 +2,6 @@ export ZSH="$HOME/.oh-my-zsh"
 
 plugins=(
     aliases
-    fzf
-    command-not-found
-    docker
-    docker-compose
-    encode64
-    git
-    gh
-    wd
     history
     zsh-syntax-highlighting
     zsh-autosuggestions
