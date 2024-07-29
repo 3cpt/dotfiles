@@ -21,4 +21,5 @@ if [[ -n "$SSH_CONNECTION" ]]; then
     fi
 fi
 
+eval "$(atuin init zsh)"
 eval "$(oh-my-posh init zsh --config $HOME/adr/dotfiles/adr.omp.yaml)"
