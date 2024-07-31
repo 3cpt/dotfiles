@@ -1,0 +1,23 @@
+function get_hostname_emoji() {
+    # Get the current hostname
+    local hostname=$(hostname)
+
+    # Define the emoji based on the hostname
+    case "$hostname" in
+    "anchor")
+        echo "⚓️"
+        ;;
+    "home")
+        echo "🏠"
+        ;;
+    "raspberry")
+        echo "🍓"
+        ;;
+    "penguin")
+        echo "🐧"
+        ;;
+    *)
+        echo "❓" # Default emoji for unknown hostnames
+        ;;
+    esac
+}

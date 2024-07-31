@@ -22,7 +22,7 @@ blocks:
       - type: session
         style: plain
         foreground: '#ffffff'
-        template: ' {{ if .SSHSession }}⚓{{ end }}<b>{{ .HostName }}</b>'
+        template: ' {{ if .SSHSession }}⚓ {{ end }}<b>{{ .HostName }}</b>'
       - type: path
         style: plain
         foreground: '#ffffff'
