@@ -1,4 +1,5 @@
 # custom alias
 
+alias cls=clear
 alias lz=lazydocker
 alias lg=lazygit

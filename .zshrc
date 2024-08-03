@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin:$HOME/.atuin/bin
 
 plugins=(
     aliases
@@ -10,6 +10,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 source ~/.zsh_alias
+source ~/.zsh_functions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

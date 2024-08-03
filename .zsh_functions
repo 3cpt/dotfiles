@@ -1,23 +1,20 @@
+# ** ZSH Functions **
+
+# Get the emoji for the current hostname
 function get_hostname_emoji() {
     # Get the current hostname
     local hostname=$(hostname)
 
     # Define the emoji based on the hostname
-    case "$hostname" in
-    "anchor")
-        echo "⚓️"
-        ;;
-    "home")
-        echo "🏠"
-        ;;
-    "raspberry")
-        echo "🍓"
-        ;;
-    "penguin")
-        echo "🐧"
-        ;;
-    *)
-        echo "❓" # Default emoji for unknown hostnames
-        ;;
-    esac
+    if [[ "$hostname" == *workstation* ]]; then
+        echo "⚓️ $hostname"
+    elif [[ "$hostname" == *Andres* ]]; then
+        echo "🏠 $hostname"
+    elif [[ "$hostname" == *pi* ]]; then
+        echo "🍓 $hostname"
+    elif [[ "$hostname" == *penguin* ]]; then
+        echo "🐧 $hostname"
+    else
+        echo "❓ $hostname" # Default emoji for unknown hostnames
+    fi
 }
