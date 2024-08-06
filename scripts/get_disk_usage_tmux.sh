@@ -1,27 +1,21 @@
 #!/bin/bash
 
-#!/bin/bash
+# Get the total disk usage percentage for all disks
+total_used=$(df -h --total | awk 'END{print $3}')
+total_size=$(df -h --total | awk 'END{print $2}')
+total_usage=$(df -h --total | awk 'END{print $5}' | sed 's/%//')
 
-# Check if the CHECK_DISK_USAGE environment variable is set and not empty
-if [ -z "$CHECK_DISK_USAGE" ]; then
-    echo "Disk not set"
-    exit 1
-fi
-
-# Get the disk usage percentage for the specified disk
-usage=$(df -h "$CHECK_DISK_USAGE" 2>/dev/null | awk 'NR==2{print $5}' | sed 's/%//')
-
-# Check if the usage value is empty (indicating an error occurred)
-if [ -z "$usage" ]; then
+# Check if the total usage value is empty (indicating an error occurred)
+if [ -z "$total_usage" ]; then
     echo "Error get disk"
     exit 1
 fi
 
-# Define color based on usage
-if [ "$usage" -lt 75 ]; then
-    echo "#[fg=green]/dev/sdb ${usage}%#[fg=default]"
-elif [ "$usage" -lt 90 ]; then
-    echo "#[fg=yellow]/dev/sdb ${usage}%#[fg=default]"
+# Define color based on total usage
+if [ "$total_usage" -lt 75 ]; then
+    echo "#[fg=green]$total_used/$total_size ($total_usage%)#[fg=default]"
+elif [ "$total_usage" -lt 90 ]; then
+    echo "#[fg=yellow]$total_used/$total_size ($total_usage%)#[fg=default]"
 else
-    echo "#[fg=red]/dev/sdb ${usage}%#[fg=default]"
+    echo "#[fg=red]$total_used/$total_size ($total_usage%)#[fg=default]"
 fi
