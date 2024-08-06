@@ -13,9 +13,9 @@ fi
 
 # Define color based on total usage
 if [ "$total_usage" -lt 75 ]; then
-    echo "#[fg=green]$total_used/$total_size ($total_usage%)#[fg=default]"
+    echo "#[fg=green]DISK: $total_used/$total_size ($total_usage%)#[fg=default]"
 elif [ "$total_usage" -lt 90 ]; then
-    echo "#[fg=yellow]$total_used/$total_size ($total_usage%)#[fg=default]"
+    echo "#[fg=yellow]DISK: $total_used/$total_size ($total_usage%)#[fg=default]"
 else
-    echo "#[fg=red]$total_used/$total_size ($total_usage%)#[fg=default]"
+    echo "#[fg=red]DISK: $total_used/$total_size ($total_usage%)#[fg=default]"
 fi
