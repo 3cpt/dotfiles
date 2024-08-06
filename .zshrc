@@ -3,6 +3,7 @@ export PATH=$PATH:$HOME/.local/bin:$HOME/.atuin/bin
 
 plugins=(
     aliases
+    git
     history
     zsh-syntax-highlighting
     zsh-autosuggestions
