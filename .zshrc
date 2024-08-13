@@ -13,6 +13,13 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_alias
 source ~/.zsh_functions
 
+for config_file in $HOME/adr/extra/*.zsh; do
+    if [ -r "$config_file" ]; then
+        echo "loading extra file: $config_file"
+        source "$config_file"
+    fi
+done
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Check if the script is running in an SSH session
