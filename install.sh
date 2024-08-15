@@ -19,7 +19,7 @@ if [ "$OS" = "Darwin" ]; then
     fi
 
     # Update Homebrew
-    brew update
+    #brew update
 
     # Install brew tools
     brew install zsh micro curl htop unzip fzf tmux atuin
@@ -41,16 +41,41 @@ else
     exit 1
 fi
 
-# Zsh setup
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
-sudo chsh -s $(which zsh)
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-mkdir -p $HOME/.local/bin
-curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
+# Zsh setup but check first if it's already installed
+if command -v zsh &>/dev/null; then
+    echo "zsh is already installed"
+else
+    echo "zsh is not installed"
+fi
 
-# Install tpm (Tmux Plugin Manager)
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+# Install oh-my-zsh and check if it's already installed
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo "oh-my-zsh is already installed"
+else
+    echo "oh-my-zsh is not installed"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+    sudo chsh -s $(which zsh)
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
+mkdir -p $HOME/.local/bin # Create bin folder if it doesn't exist
+
+# Install oh-my-posh and check if it's already installed
+if [ -d "$HOME/.oh-my-posh" ]; then
+    echo "oh-my-posh is already installed"
+else
+    echo "oh-my-posh is not installed"
+    curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
+fi
+
+# Install tpm (Tmux Plugin Manager) and check if it's already installed
+if [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "tpm is already installed"
+else
+    echo "tpm is not installed"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 # Symlink .zshrc
 ln -sf $HOME/.adr/dotfiles/.zshrc $HOME/.zshrc
