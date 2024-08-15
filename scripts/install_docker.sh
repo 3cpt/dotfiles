@@ -19,6 +19,9 @@ set_docker_repo() {
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl
 
+# Set up Docker repository URL based on the detected distribution
+set_docker_repo
+
 # Set up the Docker GPG key and apt repository
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL "$DOCKER_URL/gpg" -o /etc/apt/keyrings/docker.asc
