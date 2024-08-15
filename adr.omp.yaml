@@ -17,7 +17,7 @@ blocks:
         template: '<b>{{ .Output }}</b>'
         properties:
           shell: bash
-          script: ~/adr/dotfiles/scripts/get_hostname_emoji.sh
+          script: ~/.adr/dotfiles/scripts/get_hostname_emoji.sh
       - type: status
         style: plain
         foreground: '#ffffff'

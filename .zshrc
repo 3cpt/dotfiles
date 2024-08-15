@@ -13,12 +13,15 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_alias
 source ~/.zsh_functions
 
-for config_file in $HOME/adr/extra/*.zsh; do
-    if [ -r "$config_file" ]; then
-        echo "loading extra file: $config_file"
-        source "$config_file"
-    fi
-done
+# Load extra files if extra folder exists
+if [ -d "$HOME/.adr/extra" ]; then
+    for config_file in $HOME/.adr/extra/*.zsh; do
+        if [ -r "$config_file" ]; then
+            echo "loading extra file: $config_file"
+            source "$config_file"
+        fi
+    done
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -40,4 +43,4 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(atuin init zsh)"
-eval "$(oh-my-posh init zsh --config $HOME/adr/dotfiles/adr.omp.yaml)"
+eval "$(oh-my-posh init zsh --config $HOME/.adr/dotfiles/adr.omp.yaml)"

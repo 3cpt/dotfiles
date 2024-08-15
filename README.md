@@ -44,12 +44,12 @@ docker run -it mydebian
 cd $HOME && \
 sudo apt update && \
 sudo apt install -y git && \
-mkdir -p adr && \
-cd adr && \
+mkdir -p .adr && \
+cd .adr && \
 git clone https://github.com/3cpt/dotfiles.git && \
 cd dotfiles && \
 git checkout v3 && \
-./install_linux.sh
+./install.sh
 ```
 
 ## License

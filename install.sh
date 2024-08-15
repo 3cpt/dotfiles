@@ -53,10 +53,10 @@ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Symlink .zshrc
-ln -sf $HOME/adr/dotfiles/.zshrc $HOME/.zshrc
-ln -sf $HOME/adr/dotfiles/.zsh_alias $HOME/.zsh_alias
-ln -sf $HOME/adr/dotfiles/.zsh_functions $HOME/.zsh_functions
-ln -sf $HOME/adr/dotfiles/.tmux.conf $HOME/.tmux.conf
+ln -sf $HOME/.adr/dotfiles/.zshrc $HOME/.zshrc
+ln -sf $HOME/.adr/dotfiles/.zsh_alias $HOME/.zsh_alias
+ln -sf $HOME/.adr/dotfiles/.zsh_functions $HOME/.zsh_functions
+ln -sf $HOME/.adr/dotfiles/.tmux.conf $HOME/.tmux.conf
 
 exec zsh
 
