@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Update the package list and install prerequisites
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl
 
