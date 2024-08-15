@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Function to detect the distribution and set the appropriate Docker repository URL
+set_docker_repo() {
+    source /etc/os-release
+    if [ "$ID" == "ubuntu" ]; then
+        DOCKER_URL="https://download.docker.com/linux/ubuntu"
+    elif [ "$ID" == "debian" ]; then
+        DOCKER_URL="https://download.docker.com/linux/debian"
+    else
+        echo "Unsupported distribution: $ID"
+        exit 1
+    fi
+}
+
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl
 
