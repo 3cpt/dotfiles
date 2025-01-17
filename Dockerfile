@@ -20,6 +20,10 @@ USER my
 
 # Create a folder in the HOME directory of the user 'my'
 RUN mkdir $HOME/.config
+RUN mkdir $HOME/.config/dotfiles
+
+# Set the working directory of the user 'my'
+WORKDIR /home/my/.config/dotfiles
 
 # Start an interactive terminal
 CMD ["bash"]

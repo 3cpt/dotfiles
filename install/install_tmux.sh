@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Starting install TMUX"
+
 if [ "$OS" = "Darwin" ]; then
     brew install tmux
 elif [ "$OS" = "Linux" ]; then
@@ -9,6 +11,7 @@ else
     exit 1
 fi
 
+echo "Installing tpm"
 if [ -d "$HOME/.tmux/plugins/tpm" ]; then
     echo "tpm is already installed"
 else
@@ -16,6 +19,7 @@ else
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
+echo "Configuring TMUX"
 ln -sf $DOTFILES_PATH/configs/.tmux.conf $HOME/.tmux.conf
 
 echo "Finished install TMUX"

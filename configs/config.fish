@@ -1,8 +1,13 @@
+set -g fish_greeting "Welcome to Fish! 🐟"
+
 set -x PATH $PATH $HOME/.local/bin $HOME/.atuin/bin
-set -x ZSH_PROMPT_EMOJI 🌀
-set -x TMUX_MAIN_DISK_NAME /dev/disk3s1
-set -Ux DOTFILES_PATH __DOTFILES_PATH__
-set -Ux EXTRA_FILES_PATH __EXTRA_FILES_PATH__
+set -x GIT_EDITOR micro
+
+# Source another file with environment variables
+if test -f $HOME/.config/fish/.env.fish
+    source $HOME/.config/fish/.env.fish
+    echo ".env.fish loaded"
+end
 
 if test -d "$EXTRA_FILES_PATH" && test "$EXTRA_FILES_PATH" != __EXTRA_FILES_PATH__
     for config_file in $EXTRA_FILES_PATH/*.fish
@@ -21,8 +26,8 @@ if test -n "$SSH_CONNECTION"
     end
 end
 
-if test -f ~/.bash_profile
-    source ~/.bash_profile
+if test -f $HOME/.bash_profile
+    source $HOME/.bash_profile
 end
 
 fzf --fish | source

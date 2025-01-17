@@ -54,3 +54,4 @@ dkms.conf
 checksums.txt
 fish
 atuin
+.env.fish

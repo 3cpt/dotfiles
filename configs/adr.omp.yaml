@@ -17,13 +17,13 @@ blocks:
         template: '<b>{{ .Output }}</b>'
         properties:
           shell: bash
-          script: $(DOTFILES_PATH)/scripts/get_hostname_emoji.sh
+          script: $DOTFILES_PATH/scripts/get_hostname_emoji.sh
       - type: status
         style: plain
         foreground: '#ffffff'
         template: '{{ if eq .Code 0 }}{{ else }} 🔴{{ end }}'
         properties:
-          always_enabled: true
+          always_enabled: false
       - type: path
         style: plain
         foreground: '#ffffff'

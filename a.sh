@@ -1,21 +1,6 @@
 #!/bin/bash
 
 set -e # Stop on error
-set +x # Don't print commands
-
-echo "Starting install"
-
-export DOTFILES_PATH=$(pwd)
-echo "The current path is: $DOTFILES_PATH"
-export OS=$(uname -s)
-if [ "$OS" = "Darwin" ]; then
-    echo "Detected 🍏"
-elif [ "$OS" = "Linux" ]; then
-    echo "Detected 🐧"
-else
-    echo "Unsupported OS: $OS 🚫"
-    exit 1
-fi
 
 # Variables
 INSTALL_TMUX=false
@@ -30,11 +15,11 @@ usage() {
     echo "  -s        Specify which shell to configure (zsh or fish)."
     echo "  -t        Install and configure tmux."
     echo "  -g        Configure git with the provided name and email (e.g., -g 'Name,email@example.com')."
+    echo "  -e        Path to extra files directory."
     exit 1
 }
 
-# Parse arguments
-while getopts ":s:tg:" opt; do
+while getopts ":s:t:g:" opt; do
     case ${opt} in
     s)
         SHELL_TYPE=${OPTARG}
@@ -65,18 +50,20 @@ while getopts ":s:tg:" opt; do
     esac
 done
 
-# Check mandatory -s parameter
+# Ensure mandatory parameters
 if [[ -z "$SHELL_TYPE" ]]; then
     echo "Error: -s is a mandatory parameter."
     usage
 fi
 
-# Mandatory folders
-mkdir -p $HOME/.local/bin # Create bin folder if it doesn't exist
-mkdir -p $HOME/.config    # Create share folder if it doesn't exist
+echo "Starting..."
 
+export DOTFILES_PATH=$(pwd)
+echo "Current path: $DOTFILES_PATH"
+
+export OS=$(uname -s)
 if [ "$OS" = "Darwin" ]; then
-    echo "Detected macOS"
+    echo "Detected macOS 🍏"
 
     if ! command -v brew &>/dev/null; then
         echo "Homebrew is not installed. Please run the ./install/install_brew.sh script first."
@@ -86,14 +73,21 @@ if [ "$OS" = "Darwin" ]; then
     echo "Installing required packages"
     brew install micro curl htop unzip fzf atuin
 elif [ "$OS" = "Linux" ]; then
-    echo "Detected Linux... start update and install required packages"
+    echo "Detected Linux 🐧"
+    echo "Updating packages"
     sudo apt update
+    echo "Installing required packages"
     sudo apt install -y git micro curl htop unzip fzf
+    echo "Installing atuin"
     curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
 else
-    echo "Unsupported OS: $OS"
+    echo "Unsupported OS: $OS 🚫"
     exit 1
 fi
+
+# Mandatory folders
+mkdir -p $HOME/.local/bin # Create bin folder if it doesn't exist
+mkdir -p $HOME/.config    # Create share folder if it doesn't exist
 
 if $INSTALL_TMUX; then ./install/install_tmux.sh; fi
 
@@ -105,6 +99,17 @@ else
     curl -s https://ohmyposh.dev/install.sh | bash -s -- -d $HOME/.local/bin
 fi
 
+# Configure git if requested
+if $CONFIGURE_GIT; then
+    echo "Configuring git with name: $GIT_NAME and email: $GIT_EMAIL"
+    git config --global user.name "$GIT_NAME"
+    git config --global user.email "$GIT_EMAIL"
+fi
+
+echo "Configuring symlinks..."
+ln -sf $DOTFILES_PATH/configs/.tmux.conf $HOME/.tmux.conf
+ln -sf $DOTFILES_PATH/configs/config.toml $HOME/.config/atuin/config.toml
+
 # Install and configure the selected shell
 if [ "$SHELL_TYPE" = "zsh" ]; then
     echo "Configuring zsh..."
@@ -112,13 +117,6 @@ if [ "$SHELL_TYPE" = "zsh" ]; then
 elif [ "$SHELL_TYPE" = "fish" ]; then
     echo "Configuring fish..."
     ./install/install_fish.sh
-fi
-
-# Configure git if requested
-if $CONFIGURE_GIT; then
-    echo "Configuring git with name: $GIT_NAME and email: $GIT_EMAIL"
-    git config --global user.name "$GIT_NAME"
-    git config --global user.email "$GIT_EMAIL"
 fi
 
 echo "Done!"
