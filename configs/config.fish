@@ -30,6 +30,5 @@ if test -f $HOME/.bash_profile
     source $HOME/.bash_profile
 end
 
-fzf --fish | source
 atuin init fish | source
 oh-my-posh init fish --config $DOTFILES_PATH/configs/adr.omp.yaml | source
