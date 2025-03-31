@@ -20,9 +20,11 @@ else
     echo "No extra files found"
 end
 
-if test -n "$SSH_CONNECTION"
-    if not test -n "$TMUX"
-        tmux attach || tmux new-session
+if set -q SSH_CONNECTION; and not set -q TMUX; and not set -q SSH_ORIGINAL_COMMAND
+    if tmux has-session 2>/dev/null
+        exec tmux attach
+    else
+        exec tmux new-session
     end
 end
 
