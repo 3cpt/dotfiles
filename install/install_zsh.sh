@@ -37,7 +37,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 echo "Creating .env.zsh"
-cat <<EOF >$DOTFILES_PATH/.env.zsh
+cat <<EOF >$HOME/.env.zsh
 export DOTFILES_ZSH_PROMPT_EMOJI=🪝
 export DOTFILES_TMUX_MAIN_DISK_NAME=__NA__
 export DOTFILES_PATH=$DOTFILES_PATH

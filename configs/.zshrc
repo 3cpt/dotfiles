@@ -6,9 +6,11 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
 export GIT_EDITOR="micro"
 
 # Load environment variables from .env.zsh (equivalente ao .env.fish)
-if [ -f "$DOTFILES_PATH/.env.zsh" ]; then
+if [ -f "$HOME/.env.zsh" ]; then
     echo "Loading .env.zsh"
-    source "$DOTFILES_PATH/.env.zsh"
+    source "$HOME/.env.zsh"
+else
+    echo "No .env.zsh file found -> .env.zsh not loaded"
 fi
 
 # Oh My Zsh plugins
