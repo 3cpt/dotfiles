@@ -15,11 +15,10 @@ usage() {
     echo "  -s        Specify which shell to configure (zsh or fish)."
     echo "  -t        Install and configure tmux."
     echo "  -g        Configure git with the provided name and email (e.g., -g 'Name,email@example.com')."
-    echo "  -e        Path to extra files directory."
     exit 1
 }
 
-while getopts ":s:t:g:" opt; do
+while getopts ":s:g:t" opt; do
     case ${opt} in
     s)
         SHELL_TYPE=${OPTARG}
@@ -71,15 +70,17 @@ if [ "$OS" = "Darwin" ]; then
     fi
 
     echo "Installing required packages"
-    brew install micro curl htop unzip fzf atuin
+    brew install micro curl htop unzip fzf atuin zoxide bat
 elif [ "$OS" = "Linux" ]; then
     echo "Detected Linux 🐧"
     echo "Updating packages"
     sudo apt update
     echo "Installing required packages"
-    sudo apt install -y git micro curl htop unzip fzf
+    sudo apt install -y git micro curl htop unzip fzf bat
     echo "Installing atuin"
     curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
+    echo "Installing zoxide"
+    curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
 else
     echo "Unsupported OS: $OS 🚫"
     exit 1

@@ -31,10 +31,14 @@ atuin login     # to login into the account
 cd $HOME && \
 sudo apt update && \
 sudo apt install -y git && \
-mkdir -p adr && \
-cd adr && \
 git clone https://github.com/3cpt/dotfiles.git && \
 cd dotfiles
+```
+
+Then run:
+
+```bash
+./start.sh -s <fish|zsh> -t
 ```
 
 ## License

@@ -1,25 +1,51 @@
 #!/bin/bash
 
-sudo apt install -y zsh
-chsh -s /bin/zsh
+echo "Starting install zsh"
 
+if [ "$OS" = "Darwin" ]; then
+    echo "Detected macOS"
+    if command -v zsh >/dev/null 2>&1; then
+        echo "zsh is already installed"
+    else
+        echo "Installing zsh"
+        brew install zsh
+    fi
+
+    echo "Setting zsh as the default shell"
+    chsh -s /bin/zsh
+elif [ "$OS" = "Linux" ]; then
+    echo "Detected Linux"
+    if command -v zsh >/dev/null 2>&1; then
+        echo "zsh is already installed"
+    else
+        echo "Installing zsh"
+        sudo apt install -y zsh
+    fi
+
+    echo "Setting zsh as the default shell"
+    chsh -s /bin/zsh
+else
+    echo "Unsupported OS: $OS"
+    exit 1
+fi
+
+echo "Installing oh-my-zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+echo "Installing oh-my-zsh plugins..."
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-echo 'source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >>~/.zshrc
-echo 'source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh' >>~/.zshrc
-echo 'source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-completions/zsh-completions.plugin.zsh' >>~/.zshrc
+echo "Creating .env.zsh"
+cat <<EOF >$DOTFILES_PATH/.env.zsh
+export DOTFILES_ZSH_PROMPT_EMOJI=🪝
+export DOTFILES_TMUX_MAIN_DISK_NAME=__NA__
+export DOTFILES_PATH=$DOTFILES_PATH
+EOF
 
-# Make zsh the default shell
-chsh -s /bin/zsh
+# Link the .fishrc file
+echo "Linking fish config..."
+ln -sf $DOTFILES_PATH/configs/.zshrc $HOME/.zshrc
 
-sed -i "s|__DOTFILES_PATH__|$DOTFILES_PATH|g" ~/.zshrc
-
-# Link the .zshrc file
-ln -sf $HOME/.adr/dotfiles/.zshrc $HOME/.zshrc
-
-# Reload zsh configuration
-exec zsh
+echo "Zsh setup complete. Starting new Zsh session..."
+echo "Restart your terminal..."
