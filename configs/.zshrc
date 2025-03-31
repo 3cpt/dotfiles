@@ -22,7 +22,7 @@ plugins=(
     rand-quote
     terraform
     zbell
-    zoxine
+    zoxide
     zsh-syntax-highlighting
     zsh-autosuggestions
 )
