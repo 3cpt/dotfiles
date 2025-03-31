@@ -25,6 +25,18 @@ atuin login     # to login into the account
 
 * oh-my-posh: `oh-my-posh debug`
 
+## Script to start
+
+```bash
+cd $HOME && \
+sudo apt update && \
+sudo apt install -y git && \
+mkdir -p adr && \
+cd adr && \
+git clone https://github.com/3cpt/dotfiles.git && \
+cd dotfiles
+```
+
 ## License
 
 [MIT](LICENSE)
