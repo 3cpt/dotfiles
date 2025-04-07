@@ -42,8 +42,8 @@ fi
 
 echo "creating .env.fish"
 # Create the envs.fish file with the desired content
-cat <<EOF >.env.fish
-set -Ux DOTFILES_ZSH_PROMPT_EMOJI 🌀
+cat <<EOF >$HOME/.env.fish
+set -Ux DOTFILES_PROMPT_EMOJI 💊
 set -Ux DOTFILES_TMUX_MAIN_DISK_NAME __NA__
 set -Ux DOTFILES_PATH $DOTFILES_PATH
 EOF

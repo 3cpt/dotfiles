@@ -38,7 +38,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.
 
 echo "Creating .env.zsh"
 cat <<EOF >$HOME/.env.zsh
-export DOTFILES_ZSH_PROMPT_EMOJI=🪝
+export DOTFILES_PROMPT_EMOJI=🪝
 export DOTFILES_TMUX_MAIN_DISK_NAME=__NA__
 export DOTFILES_PATH=$DOTFILES_PATH
 EOF
