@@ -11,6 +11,7 @@ plugins=(
     git
     history
     kubectx
+    fzf-tab
     #zsh-syntax-highlighting
     #zsh-autosuggestions
 )

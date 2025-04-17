@@ -34,6 +34,16 @@ fi
 mkdir -p $HOME/.local/bin # Create bin folder if it doesn't exist
 mkdir -p $HOME/.config    # Create share folder if it doesn't exist
 
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo "oh-my-zsh is already installed"
+else
+    echo "oh-my-zsh is not installed, installing..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+echo "Installing fzf-tab"
+git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
 echo "creating symlinks"
 ln -sf /$PWD/configs/.zshrc $HOME/.zshrc
 ln -sf /$PWD/configs/aliases.zsh $HOME/.oh-my-zsh/custom/aliases.zsh
