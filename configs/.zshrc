@@ -1,57 +1,28 @@
 # Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
-
-# Environment
-export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
-export GIT_EDITOR="micro"
-
-# Load environment variables from .env.zsh (equivalente ao .env.fish)
-if [ -f "$HOME/.env.zsh" ]; then
-    echo "Loading .env.zsh"
-    source "$HOME/.env.zsh"
-else
-    echo "No .env.zsh file found -> .env.zsh not loaded"
-fi
+ZSH_THEME="sunrise"              # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+zstyle ':omz:update' mode auto   # update automatically without asking
+zstyle ':omz:update' frequency 7 # update every 7 days
 
 # Oh My Zsh plugins
+# https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
 plugins=(
     aliases
-    gcloud
     git
-    gh
     history
-    kubectl
-    rand-quote
-    terraform
-    zbell
-    zoxide
-    zsh-syntax-highlighting
-    zsh-autosuggestions
+    kubectx
+    #zsh-syntax-highlighting
+    #zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# Load custom functions
-if [ -f "$DOTFILES_PATH/configs/functions.zsh" ]; then
-    source "$DOTFILES_PATH/configs/functions.zsh"
-fi
+# Show kubectx prompt and time
+RPS1='$(kubectx_prompt_info) (%T)'
 
-# Load aliases
-if [ -f "$DOTFILES_PATH/configs/aliases.zsh" ]; then
-    source "$DOTFILES_PATH/configs/aliases.zsh"
-fi
-
-# Load extra files from $DOTFILES_PATH/extra if the folder exists
-if [ -d "$DOTFILES_PATH/extra" ]; then
-    for config_file in "$DOTFILES_PATH/extra"/*.zsh; do
-        if [ -r "$config_file" ]; then
-            echo "Loading extra file: $config_file"
-            source "$config_file"
-        fi
-    done
-else
-    echo "No extra files found in: $DOTFILES_PATH/extra"
-fi
+# Environment
+export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
+export GIT_EDITOR="micro"
 
 # Start tmux automatically on SSH (safe version)
 if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
@@ -62,14 +33,8 @@ if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
     fi
 fi
 
-# Emulate .bash_profile if it exists
-[[ -e ~/.bash_profile ]] && emulate sh -c 'source ~/.bash_profile'
-
 # Load fzf if present
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Atuin
 eval "$(atuin init zsh)"
-
-# Oh My Posh prompt
-eval "$(oh-my-posh init zsh --config $DOTFILES_PATH/configs/adr.omp.yaml)"
