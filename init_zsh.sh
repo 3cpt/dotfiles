@@ -39,7 +39,12 @@ else
 fi
 
 echo "Installing fzf-tab"
-git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+if [ -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab" ]; then
+    echo "fzf-tab is already installed"
+else
+    echo "fzf-tab is not installed, installing..."
+    git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+fi
 
 echo "creating symlinks"
 ln -sf $(pwd)/configs/.zshrc $HOME/.zshrc
