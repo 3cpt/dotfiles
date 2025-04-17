@@ -5,9 +5,6 @@ set -e
 OS=$(uname -s)
 echo "Starting setup zsh in $OS"
 
-# set a var with current dir pwd
-PWD=$(pwd)
-
 if [ "$OS" = "Darwin" ]; then
     if ! command -v brew &>/dev/null; then
         echo "Homebrew is not installed. Please run the ./install/install_brew.sh script first."
@@ -45,12 +42,12 @@ echo "Installing fzf-tab"
 git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
 
 echo "creating symlinks"
-ln -sf /$PWD/configs/.zshrc $HOME/.zshrc
-ln -sf /$PWD/configs/aliases.zsh $HOME/.oh-my-zsh/custom/aliases.zsh
-ln -sf /$PWD/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
-ln -sf /$PWD/configs/.tmux.conf $HOME/.tmux.conf
-ln -sf /$PWD/configs/config.toml $HOME/.config/atuin/config.toml
-ln -sf /$PWD/scripts/get_custom_system_info.zsh $HOME/.local/bin/get_custom_system_info
+ln -sf $(pwd)/configs/.zshrc $HOME/.zshrc
+ln -sf $(pwd)/configs/aliases.zsh $HOME/.oh-my-zsh/custom/aliases.zsh
+ln -sf $(pwd)/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
+ln -sf $(pwd)/configs/.tmux.conf $HOME/.tmux.conf
+ln -sf $(pwd)/configs/config.toml $HOME/.config/atuin/config.toml
+ln -sf $(pwd)/scripts/get_custom_system_info.zsh $HOME/.local/bin/get_custom_system_info
 
 echo "Zsh setup complete. Starting new Zsh session..."
 echo "Don't forget to run: source ~/.zshrc"
