@@ -40,7 +40,7 @@ ln -sf /$PWD/configs/aliases.zsh $HOME/.oh-my-zsh/custom/aliases.zsh
 ln -sf /$PWD/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
 ln -sf /$PWD/configs/.tmux.conf $HOME/.tmux.conf
 ln -sf /$PWD/configs/config.toml $HOME/.config/atuin/config.toml
-ln -sf /$PWD/scripts $HOME/.local/bin
+ln -sf /$PWD/scripts/get_custom_system_info.zsh $HOME/.local/bin/get_custom_system_info
 
 echo "Zsh setup complete. Starting new Zsh session..."
 echo "Don't forget to run: source ~/.zshrc"
