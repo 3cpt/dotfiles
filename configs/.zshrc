@@ -1,6 +1,6 @@
 # Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="sunrise"              # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="sammy"                # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 zstyle ':omz:update' mode auto   # update automatically without asking
 zstyle ':omz:update' frequency 7 # update every 7 days
 
@@ -8,12 +8,12 @@ zstyle ':omz:update' frequency 7 # update every 7 days
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
 plugins=(
     aliases
+    fzf-tab
     git
     history
     kubectx
-    fzf-tab
-    #zsh-syntax-highlighting
-    #zsh-autosuggestions
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
