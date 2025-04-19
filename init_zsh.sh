@@ -69,6 +69,7 @@ ln -sf $(pwd)/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
 ln -sf $(pwd)/configs/.tmux.conf $HOME/.tmux.conf
 ln -sf $(pwd)/configs/config.toml $HOME/.config/atuin/config.toml
 ln -sf $(pwd)/scripts/get_custom_system_info.zsh $HOME/.local/bin/get_custom_system_info
+ln -sf $(pwd)/configs/adr.zsh-theme $HOME/.oh-my-zsh/themes/adr.zsh-theme
 
 echo "Zsh setup complete. Starting new Zsh session..."
 echo "Don't forget to run: source ~/.zshrc"

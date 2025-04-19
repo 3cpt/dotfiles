@@ -1,6 +1,6 @@
 # Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="sammy"                # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="adr"                  # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 zstyle ':omz:update' mode auto   # update automatically without asking
 zstyle ':omz:update' frequency 7 # update every 7 days
 
@@ -17,9 +17,6 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-
-# Show kubectx prompt and time
-RPS1='$(kubectx_prompt_info) (%T)'
 
 # Environment
 export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
