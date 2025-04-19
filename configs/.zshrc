@@ -18,6 +18,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# Some motivation
+show_motivation
+
 # Environment
 export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
 export GIT_EDITOR="micro"

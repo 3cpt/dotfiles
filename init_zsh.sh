@@ -2,6 +2,20 @@
 
 set -e
 
+# Resolve script path and current directory
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+CURRENT_DIR="$(pwd)"
+
+# Only allow running the script if you're in the same folder as the script
+if [[ "$SCRIPT_DIR" != "$CURRENT_DIR" ]]; then
+    echo "❌ You must run this script from within its own folder:"
+    echo "   cd $SCRIPT_DIR && ./install.sh"
+    exit 1
+fi
+
+# ... rest of your installation logic ...
+echo "✅ Running install from the correct folder: $SCRIPT_DIR"
+
 OS=$(uname -s)
 echo "Starting setup zsh in $OS"
 
@@ -66,6 +80,7 @@ echo "creating symlinks"
 ln -sf $(pwd)/configs/.zshrc $HOME/.zshrc
 ln -sf $(pwd)/configs/aliases.zsh $HOME/.oh-my-zsh/custom/aliases.zsh
 ln -sf $(pwd)/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
+ln -sf $(pwd)/configs/motivation.zsh $HOME/.oh-my-zsh/custom/motivation.zsh
 ln -sf $(pwd)/configs/.tmux.conf $HOME/.tmux.conf
 ln -sf $(pwd)/configs/config.toml $HOME/.config/atuin/config.toml
 ln -sf $(pwd)/scripts/get_custom_system_info.zsh $HOME/.local/bin/get_custom_system_info
