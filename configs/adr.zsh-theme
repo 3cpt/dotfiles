@@ -18,5 +18,5 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg_bold[blue]%})"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}x"
 ZSH_THEME_GIT_PROMPT_CLEAN="" #" %{$fg[green]%}✔"
 
-PROMPT='%{$fg_bold[blue]%}${SHORT_HOST} %{$fg_bold[white]%}%2~$(git_prompt_info) %{$reset_color%}'
-RPROMPT="%(?..%F{001}%?)%f $(enshort $(kubectx_prompt_info)) %{$fg_bold[blue]%}(%T)%{$reset_color%}"
+PROMPT='%{$fg_bold[blue]%}${SHORT_HOST} %{$fg_bold[white]%}%2~$(git_prompt_info) %{$reset_color%}%(?..%F{001}%?) %f%{$reset_color%}'
+RPROMPT="$(enshort $(kubectx_prompt_info)) %{$fg_bold[blue]%}(%T)%{$reset_color%}"
