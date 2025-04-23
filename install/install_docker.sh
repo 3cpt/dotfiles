@@ -40,14 +40,18 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Create Docker group and add the current user to it
-sudo groupadd docker
-sudo usermod -aG docker $USER
+if ! getent group docker >/dev/null; then
+    sudo groupadd docker
+fi
+if ! id -nG "$USER" | grep -qw docker; then
+    sudo usermod -aG docker "$USER"
+fi
 
 # Notify the user to log out and log back in or use newgrp
 echo "Docker installation complete! Log out and back in, or run 'newgrp docker' to apply group changes."
 
 # Optional: Run newgrp docker to avoid logging out (uncomment if desired)
-# newgrp docker
+newgrp docker
 
 # Verify that Docker can be run without sudo
 docker run hello-world
