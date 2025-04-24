@@ -33,10 +33,32 @@ elif [ "$OS" = "Linux" ]; then
     echo "Updating packages"
     sudo apt update
 
-    echo "Installing required packages"
-    sudo apt install -y git micro curl htop unzip fzf zsh tmux # bat
+    echo "Installing required packages (excluding held packages)"
+    held=$(sudo apt-mark showhold | tr '\n' ' ')
+    packages=(git micro curl htop unzip fzf zsh tmux lazygit) # bat
+
+    # Filter out held packages
+    to_install=()
+    for pkg in "${packages[@]}"; do
+        if ! [[ " $held " == *" $pkg "* ]]; then
+            to_install+=("$pkg")
+        else
+            echo "⏸ Skipping held package: $pkg"
+        fi
+    done
+
+    # Only install if there's something left
+    if ((${#to_install[@]} > 0)); then
+        sudo apt install -y "${to_install[@]}"
+    else
+        echo "✅ All required packages are held or already handled."
+    fi
+
     echo "Installing atuin"
     curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
+
+    echo "Installing lazydocker"
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 else
     echo "Unsupported OS: $OS"
     exit 1
