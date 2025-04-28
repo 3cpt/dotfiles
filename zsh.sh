@@ -35,7 +35,7 @@ elif [ "$OS" = "Linux" ]; then
 
     echo "Installing required packages (excluding held packages)"
     held=$(sudo apt-mark showhold | tr '\n' ' ')
-    packages=(git micro curl htop unzip fzf zsh tmux lazygit) # bat
+    packages=(git micro curl htop unzip fzf zsh tmux) # bat
 
     # Filter out held packages
     to_install=()

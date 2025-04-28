@@ -23,6 +23,11 @@ show_motivation
 
 # Environment
 export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
+
+if [ -d "$HOME/google-cloud-sdk/bin" ]; then
+    export PATH="$PATH:$HOME/google-cloud-sdk/bin"
+fi
+
 export GIT_EDITOR="micro"
 
 # Start tmux automatically on SSH (safe version)
