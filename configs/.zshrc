@@ -42,5 +42,8 @@ fi
 # Load fzf if present
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # Atuin
 eval "$(atuin init zsh)"
