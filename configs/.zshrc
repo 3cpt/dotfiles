@@ -45,5 +45,10 @@ fi
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+# Run bash in non-interactive mode to source the .bash_profile
+if [ -f "$HOME/.bash_profile" ]; then
+    source $HOME/.bash_profile
+fi
+
 # Atuin
 eval "$(atuin init zsh)"
