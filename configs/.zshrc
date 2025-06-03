@@ -28,8 +28,6 @@ if [ -d "$HOME/google-cloud-sdk/bin" ]; then
     export PATH="$PATH:$HOME/google-cloud-sdk/bin"
 fi
 
-export GIT_EDITOR="micro"
-
 # Start tmux automatically on SSH (safe version)
 if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
     if tmux has-session 2>/dev/null; then
@@ -44,6 +42,10 @@ fi
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export EDITOR="micro"
+export GIT_EDITOR="micro"
+export KUBE_EDITOR="micro"
+export TERM=xterm-256color
 
 # Run bash in non-interactive mode to source the .bash_profile
 if [ -f "$HOME/.bash_profile" ]; then

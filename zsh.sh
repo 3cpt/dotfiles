@@ -35,7 +35,7 @@ elif [ "$OS" = "Linux" ]; then
 
     echo "Installing required packages (excluding held packages)"
     held=$(sudo apt-mark showhold | tr '\n' ' ')
-    packages=(git micro curl htop unzip fzf zsh tmux) # bat
+    packages=(git micro curl htop unzip fzf zsh tmux xclip kubectx) # bat
 
     # Filter out held packages
     to_install=()
@@ -59,6 +59,9 @@ elif [ "$OS" = "Linux" ]; then
 
     echo "Installing lazydocker"
     curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+
+    echo "Installing k9s"
+    wget https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.deb && apt install ./k9s_linux_amd64.deb && rm k9s_linux_amd64.deb
 else
     echo "Unsupported OS: $OS"
     exit 1
