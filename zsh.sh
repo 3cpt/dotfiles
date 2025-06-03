@@ -61,7 +61,12 @@ elif [ "$OS" = "Linux" ]; then
     curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
 
     echo "Installing k9s"
-    wget https://github.com/derailed/k9s/releases/latest/download/k9s_linux_amd64.deb && sudo apt install ./k9s_linux_amd64.deb && rm k9s_linux_amd64.deb
+    if command -v go &>/dev/null; then
+        go install github.com/derailed/k9s@latest
+        echo "✅ k9s installed via go install"
+    else
+        echo "⚠️ Cannot install k9s: Go is not installed"
+    fi
 else
     echo "Unsupported OS: $OS"
     exit 1
