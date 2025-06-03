@@ -16,7 +16,7 @@ namespace=$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/de
 
 # Choose color: red if context contains "prod", else orange
 if [[ "$context" == *prod* ]]; then
-  COLOR="#[fg_bold=red]"
+  COLOR="#[fg=red]"
 else
   COLOR="#[fg=white]"
 fi
