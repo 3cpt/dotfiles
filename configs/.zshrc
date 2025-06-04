@@ -31,9 +31,9 @@ fi
 # Start tmux automatically on SSH (safe version)
 if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
     if tmux has-session 2>/dev/null; then
-        exec tmux attach
+        tmux attach
     else
-        exec tmux new-session
+        tmux new-session
     fi
 else
     export TERM=xterm-256color
@@ -42,12 +42,6 @@ fi
 # Load fzf if present
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export EDITOR="micro"
-export GIT_EDITOR="micro"
-export KUBE_EDITOR="micro"
-
 # Run bash in non-interactive mode to source the .bash_profile
 if [ -f "$HOME/.bash_profile" ]; then
     source $HOME/.bash_profile
@@ -55,3 +49,8 @@ fi
 
 # Atuin
 eval "$(atuin init zsh)"
+
+export LANG=en_US.UTF-8
+export EDITOR="micro"
+export GIT_EDITOR="micro"
+export KUBE_EDITOR="micro"
