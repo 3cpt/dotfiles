@@ -52,9 +52,3 @@ Mkfile.old
 dkms.conf
 
 checksums.txt
-fish
-atuin
-.env.fish
-.env.zsh
-
-extra
