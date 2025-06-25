@@ -22,11 +22,17 @@ source $ZSH/oh-my-zsh.sh
 show_motivation
 
 # Environment
-export PATH="$PATH:$HOME/.local/bin:$HOME/.atuin/bin"
-
+export PATH="$HOME/.local/bin:$HOME/.atuin/bin:$PATH"
 if [ -d "$HOME/google-cloud-sdk/bin" ]; then
-    export PATH="$PATH:$HOME/google-cloud-sdk/bin"
+    export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 fi
+
+# Check for required tools
+for tool in fzf gh atuin micro; do
+    if ! command -v $tool &>/dev/null; then
+        echo "[.zshrc] Warning: $tool not found in PATH."
+    fi
+done
 
 # Start tmux automatically on SSH (safe version)
 if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
@@ -35,20 +41,23 @@ if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
     else
         tmux new-session
     fi
-else
-    export TERM=xterm-256color
 fi
 
 # Load fzf if present
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Run bash in non-interactive mode to source the .bash_profile
+# Source .bash_profile if present (for shared env vars)
 if [ -f "$HOME/.bash_profile" ]; then
-    source $HOME/.bash_profile
+    source "$HOME/.bash_profile" >/dev/null 2>&1
 fi
 
 # Atuin
-eval "$(atuin init zsh)"
+if command -v atuin &>/dev/null; then
+    if ! atuin status | grep -q 'Logged in as'; then
+        echo "[.zshrc] Warning: Atuin is installed but not logged in. Run 'atuin login' to enable sync."
+    fi
+    eval "$(atuin init zsh)"
+fi
 
 export LANG=en_US.UTF-8
 export EDITOR="micro"
