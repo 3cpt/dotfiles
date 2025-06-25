@@ -1,8 +1,8 @@
 # Use the official Debian image from the Docker Hub
-FROM debian:latest
+FROM debian:bookworm-slim
 
 # Install sudo and other necessary packages
-RUN apt-get update && apt-get install -y sudo
+RUN apt-get update && apt-get install -y sudo curl unzip
 
 # Create a new user 'my' and add it to the sudo group
 RUN useradd -m -s /bin/bash my && \
@@ -16,14 +16,10 @@ RUN echo 'my ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER my
 
 # Copy content of this repo to the container HOME directory of the user 'my'
-# COPY --chown=my:my . $HOME
-
-# Create a folder in the HOME directory of the user 'my'
-RUN mkdir $HOME/.config
-RUN mkdir $HOME/.config/dotfiles
+COPY --chown=my:my . /home/my/dotfiles
 
 # Set the working directory of the user 'my'
-WORKDIR /home/my/.config/dotfiles
+WORKDIR /home/my/dotfiles
 
 # Start an interactive terminal
 CMD ["bash"]

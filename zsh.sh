@@ -55,7 +55,12 @@ elif [ "$OS" = "Linux" ]; then
     fi
 
     echo "Installing atuin"
-    curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
+    if command -v atuin &>/dev/null; then
+        echo "Atuin already installed, running update"
+        atuin-update
+    else
+        curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
+    fi
 
     echo "Installing lazydocker"
     curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
@@ -113,6 +118,7 @@ ln -sf $(pwd)/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
 ln -sf $(pwd)/configs/motivation.zsh $HOME/.oh-my-zsh/custom/motivation.zsh
 ln -sf $(pwd)/configs/.tmux.conf $HOME/.tmux.conf
 ln -sf $(pwd)/configs/config.toml $HOME/.config/atuin/config.toml
+mkdir -p $HOME/.config/micro
 ln -sf $(pwd)/configs/settings.json $HOME/.config/micro/settings.json
 ln -sf $(pwd)/scripts/get_custom_system_info.zsh $HOME/.local/bin/get_custom_system_info
 ln -sf $(pwd)/scripts/k8s_info_tmux.zsh $HOME/.local/bin/k8s_info_tmux
@@ -120,6 +126,6 @@ ln -sf $(pwd)/scripts/k8s_info_tmux.zsh $HOME/.local/bin/k8s_info_tmux
 mkdir -p $HOME/.oh-my-zsh/custom/themes
 ln -sf $(pwd)/configs/adr.zsh-theme $HOME/.oh-my-zsh/custom/themes/adr.zsh-theme
 
-echo "Zsh setup complete. Starting new Zsh session..."
+echo "Zsh setup complete. 🎉"
 echo "Don't forget to run: source ~/.zshrc"
 echo "Make zsh default shell with: chsh -s /bin/zsh"

@@ -4,6 +4,8 @@ ZSH_THEME="adr"                  # https://github.com/ohmyzsh/ohmyzsh/wiki/Theme
 zstyle ':omz:update' mode auto   # update automatically without asking
 zstyle ':omz:update' frequency 7 # update every 7 days
 
+TERM="xterm-256color"
+
 # Oh My Zsh plugins
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
 plugins=(
