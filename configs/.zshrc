@@ -55,7 +55,7 @@ fi
 
 # Atuin
 if command -v atuin &>/dev/null; then
-    if ! atuin status | grep -q 'Logged in as'; then
+    if ! atuin status | grep -q 'Username: '; then
         echo "[.zshrc] Warning: Atuin is installed but not logged in. Run 'atuin login' to enable sync."
     fi
     eval "$(atuin init zsh)"
