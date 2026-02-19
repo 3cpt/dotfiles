@@ -38,7 +38,7 @@ cd dotfiles
 Then run:
 
 ```bash
-./start.sh -s <fish|zsh> -t
+./zsh.sh
 ```
 
 ## License

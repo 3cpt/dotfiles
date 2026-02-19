@@ -9,7 +9,7 @@ CURRENT_DIR="$(pwd)"
 # Only allow running the script if you're in the same folder as the script
 if [[ "$SCRIPT_DIR" != "$CURRENT_DIR" ]]; then
     echo "❌ You must run this script from within its own folder:"
-    echo "   cd $SCRIPT_DIR && ./install.sh"
+    echo "   cd $SCRIPT_DIR && ./zsh.sh"
     exit 1
 fi
 
@@ -57,7 +57,7 @@ elif [ "$OS" = "Linux" ]; then
     echo "Installing atuin"
     if command -v atuin &>/dev/null; then
         echo "Atuin already installed, running update"
-        atuin-update
+        atuin update
     else
         curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
     fi
@@ -79,6 +79,7 @@ fi
 
 mkdir -p $HOME/.local/bin # Create bin folder if it doesn't exist
 mkdir -p $HOME/.config    # Create share folder if it doesn't exist
+mkdir -p $HOME/.config/atuin
 
 if [ -d "$HOME/.oh-my-zsh" ]; then
     echo "oh-my-zsh is already installed"

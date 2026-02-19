@@ -7,7 +7,7 @@ sudo -v
 sudo nvram SystemAudioVolume=" "
 
 # show hidden files
-defaults write com.apple.Finder AppleShowAllFiles true
+defaults write com.apple.finder AppleShowAllFiles true
 
 # disable mouse acceleration (requires restart)
 defaults write .GlobalPreferences com.apple.mouse.scaling -1

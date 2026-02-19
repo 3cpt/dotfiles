@@ -1,4 +1,8 @@
+# Print a random motivational phrase to the terminal.
+# Set NO_MOTIVATION=1 to disable this output.
 function show_motivation() {
+    # Only show in interactive shells and if not disabled
+    [[ $- != *i* || -n "$NO_MOTIVATION" ]] && return
     local phrases=(
         # Chuck Norris quotes
         "The terminal doesn't fear you. It fears whoever taught you."
@@ -44,7 +48,17 @@ function show_motivation() {
         "In your terminal, peace you must find."
     )
     local random_index=$((RANDOM % ${#phrases[@]}))
-    local yellow='\033[1;33m' # Yellow color for the text
-    local reset='\033[0m'
-    echo "${yellow}${phrases[$random_index]}${reset}"
+    # Use tput for color if available, fallback to ANSI
+    local yellow reset
+    if command -v tput &>/dev/null; then
+        yellow="$(
+            tput setaf 3
+            tput bold
+        )"
+        reset="$(tput sgr0)"
+    else
+        yellow='\033[1;33m'
+        reset='\033[0m'
+    fi
+    echo -e "${yellow}${phrases[$random_index]}${reset}"
 }

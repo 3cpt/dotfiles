@@ -21,13 +21,21 @@ else
     exit 1
 fi
 
-extension="deb"
-
 OS=$(uname -s)
 
 if [ "$OS" = "Darwin" ]; then
-    extension="zip"
+    if command -v brew >/dev/null 2>&1; then
+        echo "Installing GitHub CLI via Homebrew..."
+        brew install gh
+        echo "GitHub CLI installed successfully!"
+        exit 0
+    else
+        echo "Homebrew is not installed. Please install Homebrew first."
+        exit 1
+    fi
 fi
+
+extension="deb"
 
 echo "System architecture determined: $arch"
 

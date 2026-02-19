@@ -65,3 +65,4 @@ export LANG=en_US.UTF-8
 export EDITOR="micro"
 export GIT_EDITOR="micro"
 export KUBE_EDITOR="micro"
+export PATH="/opt/homebrew/bin:$PATH"

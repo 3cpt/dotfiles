@@ -3,6 +3,14 @@
 # This works like docker ps -a, but each line is selectable with fzf. The
 # selected container ID is printed to stdout.
 function dps() {
+    if ! command -v docker &>/dev/null; then
+        echo "dps: docker not found" >&2
+        return 1
+    fi
+    if ! command -v fzf &>/dev/null; then
+        echo "dps: fzf not found" >&2
+        return 1
+    fi
     local containers
     containers=$(docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Image}}\t{{.Ports}}")
 
@@ -12,7 +20,7 @@ function dps() {
         return 1
     fi
 
-    echo "$containers" | fzf --header-lines=1 | awk '{print}'
+    echo "$containers" | fzf --header-lines=1
 }
 
 # Interactively select a Docker container from the list of running containers using fzf
@@ -22,6 +30,14 @@ function dps() {
 # Options:
 #   -f    Follow the container's logs instead of displaying a fixed number of lines.
 function logs() {
+    if ! command -v docker &>/dev/null; then
+        echo "logs: docker not found" >&2
+        return 1
+    fi
+    if ! command -v fzf &>/dev/null; then
+        echo "logs: fzf not found" >&2
+        return 1
+    fi
     local follow_flag=""
 
     if [[ "$1" == "-f" ]]; then
@@ -48,6 +64,14 @@ function logs() {
 #
 # If no PR is selected, it outputs "No PR selected".
 function ghprc() {
+    if ! command -v gh &>/dev/null; then
+        echo "ghprc: gh CLI not found" >&2
+        return 1
+    fi
+    if ! command -v fzf &>/dev/null; then
+        echo "ghprc: fzf not found" >&2
+        return 1
+    fi
     local usage="Usage: ghprc [-u] [-h]
     -u    Print the PR title and link instead of checking out
     -h    Show this help message"
@@ -69,7 +93,8 @@ function ghprc() {
     done
 
     local pr_data
-    pr_data=$(gh pr list --author "@me" --limit 100 --json number,title,url --jq '.[] | select(.number != null) | [.number, .title, .url] | @tsv' | fzf --header="Select a PR" --delimiter="\t" --preview='echo {2}')
+    pr_data=$(gh pr list --author "@me" --limit 100 --json number,title,url --jq '.[] | select(.number != null) | [.number, .title, .url] | @tsv' |
+        fzf --header="Select a PR" --delimiter="\t" --preview='echo "Title: {2}\nURL: {3}"')
 
     if [[ -n "$pr_data" ]]; then
         local pr_number pr_title pr_url

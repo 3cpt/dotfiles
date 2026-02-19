@@ -27,11 +27,21 @@ curl -LO "$ASSET_URL"
 ZIP_FILE=$(basename "$ASSET_URL")
 unzip -o "$ZIP_FILE" -d "$FONT_DIR"
 
+font_file=$(find "$FONT_DIR" -type f \( -name "CascadiaCode.ttf" -o -name "CascadiaCode-Regular.ttf" -o -name "CascadiaCodePL.ttf" -o -name "CascadiaCodePL-Regular.ttf" \) | head -n1)
+if [[ -z "$font_file" ]]; then
+    font_file=$(find "$FONT_DIR" -type f -name "*.ttf" | head -n1)
+fi
+if [[ -z "$font_file" ]]; then
+    echo "No .ttf files found after extracting Cascadia Code."
+    exit 1
+fi
+rel_font_path="${font_file#$FONT_DIR/}"
+
 # Generate cascadia-code.css
 cat >"$CSS_FILE" <<EOF
 @font-face {
     font-family: 'Cascadia Code';
-    src: url('./CascadiaCode.ttf') format('truetype');
+    src: url('./${rel_font_path}') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

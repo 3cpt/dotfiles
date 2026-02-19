@@ -47,11 +47,6 @@ if ! id -nG "$USER" | grep -qw docker; then
     sudo usermod -aG docker "$USER"
 fi
 
-# Notify the user to log out and log back in or use newgrp
+# Notify the user to log out and log back in
 echo "Docker installation complete! Log out and back in, or run 'newgrp docker' to apply group changes."
-
-# Optional: Run newgrp docker to avoid logging out (uncomment if desired)
-newgrp docker
-
-# Verify that Docker can be run without sudo
-docker run hello-world
+echo "After that, verify with: docker run hello-world"
