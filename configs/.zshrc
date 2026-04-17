@@ -1,10 +1,10 @@
-# Oh My Zsh
+export LANG=en_US.UTF-8
+export PATH="/opt/homebrew/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="adr"                  # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
+ZSH_THEME="adr"
 zstyle ':omz:update' mode auto   # update automatically without asking
 zstyle ':omz:update' frequency 7 # update every 7 days
-
-TERM="xterm-256color"
 
 # Oh My Zsh plugins
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
@@ -25,6 +25,7 @@ show_motivation
 
 # Environment
 export PATH="$HOME/.local/bin:$HOME/.atuin/bin:$PATH"
+
 if [ -d "$HOME/google-cloud-sdk/bin" ]; then
     export PATH="$HOME/google-cloud-sdk/bin:$PATH"
 fi
@@ -60,9 +61,3 @@ if command -v atuin &>/dev/null; then
     fi
     eval "$(atuin init zsh)"
 fi
-
-export LANG=en_US.UTF-8
-export EDITOR="micro"
-export GIT_EDITOR="micro"
-export KUBE_EDITOR="micro"
-export PATH="/opt/homebrew/bin:$PATH"

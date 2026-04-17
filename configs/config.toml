@@ -18,6 +18,7 @@ common_subcommands = [
     "tmux",
     "yarn",
     "npm",
+    "make",
 ]
 ignored_commands = ["cd", "ls", "la", "a", "gst"]
 
