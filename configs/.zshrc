@@ -1,5 +1,6 @@
 export LANG=en_US.UTF-8
 export PATH="/opt/homebrew/bin:$PATH"
+[[ "$TERM" == "xterm-ghostty" ]] && export TERM=xterm-256color
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="adr"
@@ -56,7 +57,7 @@ fi
 
 # Atuin
 if command -v atuin &>/dev/null; then
-    if ! atuin status | grep -q 'Username: '; then
+    if ! atuin status 2>/dev/null | grep -q 'Username: '; then
         echo "[.zshrc] Warning: Atuin is installed but not logged in. Run 'atuin login' to enable sync."
     fi
     eval "$(atuin init zsh)"

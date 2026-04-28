@@ -114,7 +114,6 @@ fi
 
 echo "creating symlinks"
 ln -sf $(pwd)/configs/.zshrc $HOME/.zshrc
-ln -sf $(pwd)/configs/aliases.zsh $HOME/.oh-my-zsh/custom/aliases.zsh
 ln -sf $(pwd)/configs/functions.zsh $HOME/.oh-my-zsh/custom/functions.zsh
 ln -sf $(pwd)/configs/motivation.zsh $HOME/.oh-my-zsh/custom/motivation.zsh
 ln -sf $(pwd)/configs/.tmux.conf $HOME/.tmux.conf
