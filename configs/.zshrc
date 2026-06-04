@@ -1,5 +1,5 @@
 export LANG=en_US.UTF-8
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/go/bin:/opt/homebrew/bin:$PATH"
 [[ "$TERM" == "xterm-ghostty" ]] && export TERM=xterm-256color
 export ZSH="$HOME/.oh-my-zsh"
 
