@@ -26,7 +26,11 @@ if [ "$OS" = "Darwin" ]; then
     fi
 
     echo "Installing tools"
-    brew install micro curl htop unzip fzf atuin zsh tmux # bat zoxide
+    brew install micro curl htop unzip fzf atuin zsh gh go node
+
+    echo "Installing apps"
+    brew install --cask maccy proton-pass claude-code zed spotify ghostty caffeine whatsapp brave-browser raspberry-pi-imager github
+
 elif [ "$OS" = "Linux" ]; then
     echo "Detected Linux 🐧"
 
