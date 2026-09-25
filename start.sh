@@ -9,7 +9,7 @@ CURRENT_DIR="$(pwd)"
 # Only allow running the script if you're in the same folder as the script
 if [[ "$SCRIPT_DIR" != "$CURRENT_DIR" ]]; then
     echo "❌ You must run this script from within its own folder:"
-    echo "   cd $SCRIPT_DIR && ./zsh.sh"
+    echo "   cd $SCRIPT_DIR && ./start.sh"
     exit 1
 fi
 
@@ -64,6 +64,13 @@ elif [ "$OS" = "Linux" ]; then
         atuin update
     else
         curl --proto '=https' --tlsv1.2 -LsSf https://github.com/atuinsh/atuin/releases/latest/download/atuin-installer.sh -q | sh
+    fi
+
+    echo "Installing Proton Pass CLI"
+    if command -v pass-cli &>/dev/null; then
+        echo "pass-cli already installed"
+    else
+        curl -fsSL https://proton.me/download/pass-cli/install.sh | bash
     fi
 
     echo "Installing lazydocker"

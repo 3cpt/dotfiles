@@ -36,7 +36,7 @@ cd dotfiles
 Then run:
 
 ```bash
-./zsh.sh
+./start.sh
 ```
 
 ## License
