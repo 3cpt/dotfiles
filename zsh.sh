@@ -26,10 +26,10 @@ if [ "$OS" = "Darwin" ]; then
     fi
 
     echo "Installing tools"
-    brew install micro curl htop unzip fzf atuin zsh gh go node
+    brew install micro curl htop unzip fzf atuin zsh gh go node proton-pass-cli
 
     echo "Installing apps"
-    brew install --cask maccy proton-pass claude-code zed spotify ghostty caffeine whatsapp brave-browser raspberry-pi-imager github
+    brew install --cask maccy proton-pass claude-code claude zed spotify ghostty caffeine whatsapp brave-browser raspberry-pi-imager github telegram vorssaint vlc google-drive
 
 elif [ "$OS" = "Linux" ]; then
     echo "Detected Linux 🐧"
