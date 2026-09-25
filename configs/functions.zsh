@@ -115,3 +115,19 @@ function ghprc() {
         echo "No PR selected"
     fi
 }
+
+# Log in to Atuin using credentials stored in Proton Pass.
+# Expects a login item titled "Atuin" (username + password) with a custom
+# field "key" holding the mnemonic from `atuin key`.
+function atuin-login() {
+    if ! command -v pass-cli &>/dev/null; then
+        echo "atuin-login: pass-cli not found" >&2
+        return 1
+    fi
+    pass-cli info &>/dev/null || pass-cli login || return 1
+    local item=(--item-title "${1:-Atuin}")
+    atuin login \
+        -u "$(pass-cli item view "${item[@]}" --field username)" \
+        -p "$(pass-cli item view "${item[@]}" --field password)" \
+        -k "$(pass-cli item view "${item[@]}" --field key)"
+}

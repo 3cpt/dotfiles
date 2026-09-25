@@ -16,6 +16,9 @@ atuin key       # to get the mnemonic phrase
 atuin login     # to login into the account
 ```
 
+Or store them once in Proton Pass as a login item `Atuin` (username, password,
+custom field `key` = the mnemonic) and run `atuin-login` on new machines.
+
 ## Debug
 
 * oh-my-posh: `oh-my-posh debug`
