@@ -39,11 +39,11 @@ for tool in fzf gh atuin micro; do
 done
 
 # Start tmux automatically on SSH (safe version)
-if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]]; then
+if [[ -n "$SSH_CONNECTION" && -z "$TMUX" && -z "$SSH_ORIGINAL_COMMAND" ]] && command -v tmux >/dev/null; then
     if tmux has-session 2>/dev/null; then
-        tmux attach
+        exec tmux attach
     else
-        tmux new-session
+        exec tmux new-session
     fi
 fi
 
