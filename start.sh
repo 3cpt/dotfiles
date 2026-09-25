@@ -39,7 +39,7 @@ elif [ "$OS" = "Linux" ]; then
 
     echo "Installing required packages (excluding held packages)"
     held=$(sudo apt-mark showhold | tr '\n' ' ')
-    packages=(git micro curl htop unzip fzf zsh tmux xclip kubectx) # bat
+    packages=(git micro curl htop unzip fzf zsh tmux xclip kubectx jq) # bat
 
     # Filter out held packages
     to_install=()
